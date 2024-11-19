@@ -1,0 +1,98 @@
+export const products = [
+  {
+    id: "men-1",
+    category: "men",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "men-2",
+    category: "men",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "men-3",
+    category: "men",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "men-4",
+    category: "men",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "women-1",
+    category: "women",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "women-2",
+    category: "women",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "women-3",
+    category: "women",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "women-4",
+    category: "women",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "kids-1",
+    category: "kids",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "kids-2",
+    category: "kids",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "kids-3",
+    category: "kids",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "kids-4",
+    category: "kids",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "sale-1",
+    category: "sale",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "sale-2",
+    category: "sale",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "sale-3",
+    category: "sale",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+  {
+    id: "sale-4",
+    category: "sale",
+    name: "Nike Air Max Ultra Blaster",
+    price: 89,
+  },
+];
