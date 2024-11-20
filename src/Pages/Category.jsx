@@ -1,26 +1,21 @@
-import React, { useContext } from "react";
 import Marquee from "../Components/Marquee";
 import Header from "../Components/Header";
 import Sidebar from "../Components/Sidebar";
 import { Link, useParams } from "react-router-dom";
 import Footer from "../Components/Footer";
 import { products } from "../data/products";
-import { MyContext } from "../App";
+import { useCarts } from "../useCarts";
 
 const Category = () => {
   const params = useParams();
-  console.log("params", params);
+  // console.log("params", params);
 
   const categoryProducts = products.filter((p) => p.category === params.id);
 
-  const { carts, setCarts } = useContext(MyContext);
+  const { addCart } = useCarts();
 
-  const addCart = (product) => {
-    if (carts.find((item) => item.id === product.id)) {
-      alert("You've already added this item!");
-      return;
-    }
-    setCarts((prev) => [...prev, product]);
+  const handleAddCart = (product) => {
+    addCart(product);
   };
 
   return (
@@ -46,7 +41,7 @@ const Category = () => {
               <Link
                 to="/cart"
                 className="call-to-action"
-                onClick={() => addCart(p)}
+                onClick={() => handleAddCart(p)}
               >
                 Add to Cart
               </Link>

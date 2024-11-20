@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { MyContext } from "../App";
 
 const Sidebar = () => {
-  const { setUser } = useContext(MyContext);
+  const { setUserModal } = useContext(MyContext);
 
   return (
     <aside className="sidebar anime-left">
@@ -16,7 +16,7 @@ const Sidebar = () => {
           src="/assets/img/png/user.png"
           alt="User Icon"
           onClick={() => {
-            setUser(true);
+            setUserModal(true);
           }}
         />
         <Link to="/cart">

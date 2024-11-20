@@ -1,35 +1,78 @@
-import React, { useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { MyContext } from "../App";
+import { users } from "../data/users";
 
 const User = () => {
-  const { user, setUser } = useContext(MyContext);
   const form = useRef();
+  const { userModal, setUserModal, currentUserEmail, setCurrentUserEmail } =
+    useContext(MyContext);
 
-  function handleClick({ target }) {
+  function handleBackdrop({ target }) {
     if (form.current && !form.current.contains(target)) {
-      setUser(false);
+      setUserModal(false);
     }
   }
 
-  if (user) {
-    return (
-      <div className="user-login" onClick={handleClick}>
-        <form action="#" ref={form}>
-          <h2>Login to you Nike account</h2>
-          <div>
-            <label htmlFor="email">E-mail</label>
-            <input type="text" id="email" />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
-          </div>
-          <button type="submit" className="call-to-action">
-            Login
-          </button>
-        </form>
-      </div>
+  function handleLogin(e) {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    const found = users.find(
+      (u) => u.email === email && u.password === password
     );
+    if (found) {
+      setCurrentUserEmail(email);
+      setUserModal(false);
+      alert("Logged in successfully!");
+    } else {
+      alert("Sorry, no registered user. Please try again.");
+    }
+  }
+
+  function handleLogout(e) {
+    e.preventDefault();
+    setCurrentUserEmail("");
+    setUserModal(false);
+    alert("Logged out successfully.");
+  }
+
+  if (userModal) {
+    if (currentUserEmail) {
+      return (
+        <div className="user-login" onClick={handleBackdrop}>
+          <form action="#" ref={form} onSubmit={handleLogout}>
+            <h2>Your Information</h2>
+            <div>
+              <label htmlFor="email">E-mail</label>
+              <p>{currentUserEmail}</p>
+            </div>
+            <button type="submit" className="call-to-action">
+              Logout
+            </button>
+          </form>
+        </div>
+      );
+    } else {
+      return (
+        <div className="user-login" onClick={handleBackdrop}>
+          <form action="#" ref={form} onSubmit={handleLogin}>
+            <h2>Login to you Nike account</h2>
+            <div>
+              <label htmlFor="email">E-mail</label>
+              <input type="text" id="email" />
+            </div>
+            <div>
+              <label htmlFor="password">Password</label>
+              <input type="password" id="password" />
+            </div>
+            <button type="submit" className="call-to-action">
+              Login
+            </button>
+          </form>
+        </div>
+      );
+    }
   } else {
     return null;
   }

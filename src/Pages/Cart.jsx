@@ -1,15 +1,14 @@
-import React, { useContext, useState } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Sidebar from "../Components/Sidebar";
 import { Link } from "react-router-dom";
-import { MyContext } from "../App";
+import { useCarts } from "../useCarts";
 
 const Cart = () => {
-  const { carts, setCarts } = useContext(MyContext);
+  const { currentUserCarts: carts, deleteCart, isLoggedin } = useCarts();
 
-  const deleteCart = (id) => {
-    setCarts(carts.filter((item) => item.id !== id));
+  const handleDeleteCart = (id) => {
+    deleteCart(id);
   };
 
   return (
@@ -32,11 +31,15 @@ const Cart = () => {
                       <h2>{item.name}</h2>
                       <span>${item.price}</span>
                     </div>
-                    <span onClick={() => deleteCart(item.id)}>X</span>
+                    <span onClick={() => handleDeleteCart(item.id)}>X</span>
                   </li>
                 ))
               ) : (
-                <li>Your cart is empty.</li>
+                <li>
+                  {isLoggedin
+                    ? "Your cart is empty."
+                    : "You need to login first."}
+                </li>
               )}
             </ul>
             {carts.length > 0 ? (

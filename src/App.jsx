@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Home from "./Pages/Home";
 import Category from "./Pages/Category";
 import "./App.css";
@@ -8,18 +8,34 @@ import Cart from "./Pages/Cart";
 import User from "./Components/User";
 
 export const MyContext = createContext({
-  carts: [],
-  setCarts: () => null,
-  user: false,
-  setUser: () => null,
+  cartObj: {}, // { "user1@gmail.com": [], "user2@gmail.com": [], ... }
+  setCartObj: () => null,
+  userModal: false,
+  setUserModal: () => null,
+  currentUserEmail: "",
+  setCurrentUserEmail: () => null,
 });
 
 function App() {
-  const [carts, setCarts] = useState([]);
-  const [user, setUser] = useState(false);
+  const [cartObj, setCartObj] = useState({});
+  const [userModal, setUserModal] = useState(false);
+  const [currentUserEmail, setCurrentUserEmail] = useState("");
+
+  useEffect(() => {
+    console.log("cartObj", cartObj);
+  }, [cartObj]);
 
   return (
-    <MyContext.Provider value={{ carts, setCarts, user, setUser }}>
+    <MyContext.Provider
+      value={{
+        cartObj,
+        setCartObj,
+        userModal,
+        setUserModal,
+        currentUserEmail,
+        setCurrentUserEmail,
+      }}
+    >
       <User />
       <BrowserRouter>
         <Routes>
