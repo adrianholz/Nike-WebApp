@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { MyContext } from "../App";
 
 const Sidebar = () => {
+  const { setUser } = useContext(MyContext);
+
   return (
     <aside className="sidebar anime-left">
       <Link to="/">
@@ -9,8 +12,13 @@ const Sidebar = () => {
       </Link>
       <p>Style takes over</p>
       <div className="header-icons">
-        <img src="/assets/img/png/search.png" alt="Search Icon" />
-        <img src="/assets/img/png/heart.png" alt="Favorites Icon" />
+        <img
+          src="/assets/img/png/user.png"
+          alt="User Icon"
+          onClick={() => {
+            setUser(true);
+          }}
+        />
         <Link to="/cart">
           <img src="/assets/img/png/bag.png" alt="Bag Icon" />
         </Link>

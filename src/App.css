@@ -658,6 +658,58 @@ footer img {
   }
 }
 
+.user-login {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.5);
+  form {
+    h2 {
+      font-size: 1.5rem;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    background: linear-gradient(315deg, #f6f6f6 0%, #e9e9e9 74%);
+    max-width: 460px;
+    width: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      input {
+        padding: 12px;
+        background: linear-gradient(to bottom right, #eeeeee, #f9f9f9);
+        border: 1px solid #d0d0d0;
+        border-radius: 5px;
+      }
+      label {
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    }
+    button {
+      text-transform: uppercase;
+      background: none;
+      border: 2px solid #161616;
+      font-weight: 500;
+      &:hover {
+        cursor: pointer;
+        background: #161616;
+        color: #fff;
+      }
+    }
+  }
+}
+
 @keyframes floating {
   0% {
     transform: rotate(-25deg) translateY(0px) translateX(0px);
