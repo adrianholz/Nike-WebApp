@@ -1,11 +1,13 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { MyContext } from "../App";
-import { users } from "../data/users";
+import { useAuth } from "../useAuth";
+import axios from "axios";
 
 const User = () => {
   const form = useRef();
-  const { userModal, setUserModal, currentUserEmail, setCurrentUserEmail } =
-    useContext(MyContext);
+  const { userModal, setUserModal, currentUserEmail } = useContext(MyContext);
+  const { login, logout } = useAuth();
+  const [users, setUsers] = useState([]);
 
   function handleBackdrop({ target }) {
     if (form.current && !form.current.contains(target)) {
@@ -22,8 +24,8 @@ const User = () => {
       (u) => u.email === email && u.password === password
     );
     if (found) {
-      setCurrentUserEmail(email);
       setUserModal(false);
+      login(email);
       alert("Logged in successfully!");
     } else {
       alert("Sorry, no registered user. Please try again.");
@@ -32,10 +34,25 @@ const User = () => {
 
   function handleLogout(e) {
     e.preventDefault();
-    setCurrentUserEmail("");
     setUserModal(false);
+    logout();
     alert("Logged out successfully.");
   }
+
+  // fetch user data
+  async function fetchLocalUserData() {
+    try {
+      const response = await axios.get("/users.json"); // public 폴더에서 제공
+      // console.log("💙 Users Json:", response.data);
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Error fetching local JSON data:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchLocalUserData();
+  }, []);
 
   if (userModal) {
     if (currentUserEmail) {
