@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
-      <Sidebar />
+      <Sidebar animate={true} />
       <div className="gradient-background">
         <Header />
         <main>

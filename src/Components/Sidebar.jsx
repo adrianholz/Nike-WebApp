@@ -2,11 +2,13 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { MyContext } from "../App";
 
-const Sidebar = () => {
+const Sidebar = ({ animate }) => {
   const { setUserModal } = useContext(MyContext);
 
   return (
-    <aside className="sidebar anime-left">
+    <aside
+      className={animate ? "sidebar anime-left animate" : "sidebar anime-left"}
+    >
       <Link to="/">
         <img src="/assets/img/svg/logo.svg" id="logo" alt="Nike Logo" />
       </Link>

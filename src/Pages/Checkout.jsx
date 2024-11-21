@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 import Sidebar from "../Components/Sidebar";
+import { MyContext } from "../App";
+import { useCarts } from "../useCarts";
 
 const Checkout = () => {
+  const { currentUserCarts } = useCarts();
+  const [total, setTotal] = useState(null);
+
+  useEffect(() => {
+    if (currentUserCarts) {
+      const totalPrice = currentUserCarts.reduce((acc, product) => {
+        return acc + product.price;
+      }, 0);
+      setTotal(totalPrice);
+    }
+  }, []);
+
   return (
     <>
       <Sidebar />
@@ -40,9 +54,23 @@ const Checkout = () => {
               </form>
             </div>
             <div className="product-info">
-              <img src="/assets/img/png/men-1.png" alt="Product Checkout" />
-              <h2>Nike Ultra Blaster</h2>
-              <span>$89</span>
+              <ul>
+                {currentUserCarts ? (
+                  currentUserCarts.map((product) => (
+                    <li>
+                      <img
+                        src={`/assets/img/png/${product.id}.png`}
+                        alt={`${product.name}`}
+                      />
+                      <h3>{product.name}</h3>
+                      <span>${product.price}</span>
+                    </li>
+                  ))
+                ) : (
+                  <h2>There are no products in your cart.</h2>
+                )}
+              </ul>
+              {total ? <h3>Total: ${total}</h3> : null}
             </div>
           </div>
         </div>
