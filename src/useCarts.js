@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { MyContext } from "./App";
+import { localStorageKey } from "./data/localStorageKey";
 
 export const useCarts = () => {
   const { cartObj, setCartObj, currentUserEmail } = useContext(MyContext);
@@ -22,6 +23,7 @@ export const useCarts = () => {
       [currentUserEmail]: newArray,
     };
     setCartObj(newCartObj);
+    localStorage.setItem(localStorageKey.cartObj, JSON.stringify(newCartObj));
   };
 
   const deleteCart = (id) => {
@@ -31,6 +33,7 @@ export const useCarts = () => {
       [currentUserEmail]: newArray,
     };
     setCartObj(newCartObj);
+    localStorage.setItem(localStorageKey.cartObj, JSON.stringify(newCartObj));
   };
 
   return {

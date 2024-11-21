@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Checkout from "./Pages/Checkout";
 import Cart from "./Pages/Cart";
 import User from "./Components/User";
+import { localStorageKey } from "./data/localStorageKey";
 
 export const MyContext = createContext({
   cartObj: {}, // { "user1@gmail.com": [], "user2@gmail.com": [], ... }
@@ -22,8 +23,20 @@ function App() {
   const [currentUserEmail, setCurrentUserEmail] = useState("");
 
   useEffect(() => {
-    console.log("cartObj", cartObj);
-  }, [cartObj]);
+    // check `cartObj` from localStorage
+    const cartObj = localStorage.getItem(localStorageKey.cartObj);
+    if (cartObj) {
+      setCartObj(JSON.parse(cartObj));
+    }
+
+    // check `loggedinUserEmail` from localStorage
+    const loggedinUserEmail = localStorage.getItem(
+      localStorageKey.loggedinUserEmail
+    );
+    if (loggedinUserEmail) {
+      setCurrentUserEmail(loggedinUserEmail);
+    }
+  }, []);
 
   return (
     <MyContext.Provider

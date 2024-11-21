@@ -1,11 +1,12 @@
 import { useContext, useRef } from "react";
 import { MyContext } from "../App";
 import { users } from "../data/users";
+import { useAuth } from "../useAuth";
 
 const User = () => {
   const form = useRef();
-  const { userModal, setUserModal, currentUserEmail, setCurrentUserEmail } =
-    useContext(MyContext);
+  const { userModal, setUserModal, currentUserEmail } = useContext(MyContext);
+  const { login, logout } = useAuth();
 
   function handleBackdrop({ target }) {
     if (form.current && !form.current.contains(target)) {
@@ -22,8 +23,8 @@ const User = () => {
       (u) => u.email === email && u.password === password
     );
     if (found) {
-      setCurrentUserEmail(email);
       setUserModal(false);
+      login(email);
       alert("Logged in successfully!");
     } else {
       alert("Sorry, no registered user. Please try again.");
@@ -32,8 +33,8 @@ const User = () => {
 
   function handleLogout(e) {
     e.preventDefault();
-    setCurrentUserEmail("");
     setUserModal(false);
+    logout();
     alert("Logged out successfully.");
   }
 
